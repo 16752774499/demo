@@ -1,0 +1,94 @@
+<html>
+<head>
+    <script src="../js/configuration.js"></script>
+    <script src="../js/sidebar.js"></script>
+    <!--    <script src="../js/background.js"></script>-->
+    <script src="../js/axios.js"></script>
+    <script src="../js/FileSaver.js"></script>
+    <script src="../js/xlsx.core.min.js"></script>
+    <link rel="stylesheet" href="../css/saveFile.css">
+    <meta charset="UTF-8">
+    <title>Form Page</title>
+    <style>
+        body {
+
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f1f1f1;
+        }
+
+        .container {
+            width: 400px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .form-group input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+
+        .form-group input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .form-control {
+            resize: vertical; /* 允许垂直调整大小 */
+            overflow: auto; /* 当内容超出元素大小时显示滚动条 */
+            min-height: 50px; /* 设置一个最小高度 */
+            max-height: 300px; /* 设置一个最大高度 */
+        }
+    </style>
+</head>
+<body id="mySidebar" class="sidebar">
+
+<div class="container">
+    <form>
+        <div class="form-group">
+            <label for="input3">页面url(请确认url是否正确，错误或为空请手动添加)</label>
+            <input type="text" id="input3" name="input1">
+        </div>
+        <div class="form-group">
+            <label for="input1">采集页数</label>
+            <input type="text" id="input1" name="input1" value="1">
+        </div>
+        <div class="form-group">
+            <label for="xpathInput">需要采集的Xpath</label>
+
+            <textarea id="xpathInput" name="input2" class="form-control"></textarea>
+        </div>
+
+        <div class="form-group">
+            <input id="submitInput" type="submit">
+        </div>
+
+    </form>
+</div>
+</body>
+
+</html>
