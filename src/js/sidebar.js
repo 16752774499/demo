@@ -243,13 +243,20 @@ function SaveExcel(SendData) {
     }
     console.log("SaveExcel");
     // 处理表头
+    let temp = []
+    let index = 1;
     getInputValues().forEach((item) => {
+
         if (item !== "") {
-            table.push(item);
+            temp.push(item);
         } else {
-            table.push("Key" + getInputValues().indexOf(item));
+            temp.push("Key" + index);
+
         }
+        index += 1;
     })
+    table.push(temp)
+
     console.log(SendData.data);
     SendData.data.forEach((item) => {
         let temp = []
@@ -259,34 +266,74 @@ function SaveExcel(SendData) {
         }
         table.push(temp);
     });
-
-    table.push(table);
     console.log(table);
-    let workbook = new ExcelJS.Workbook();
-
-// 添加一个工作表
-    let worksheet = workbook.addWorksheet('Sheet1');
-    worksheet.addRows(table);
-
-// 保存 Excel 文件
-    workbook.xlsx.writeBuffer()
-        .then(function (buffer) {
-            // 将生成的 Excel 文件保存为 Blob 对象
-            var blob = new Blob([buffer], {type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
-
-            // 创建下载链接并设置文件名
-            var downloadLink = document.createElement('a');
-            downloadLink.href = window.URL.createObjectURL(blob);
-            downloadLink.download = fileName;
-
-            // 点击下载链接触发下载
-            downloadLink.click();
+    let formData = new FormData();
+    formData.append('file', createExcel(table, fileName), fileName);
+    formData.append('fileName',fileName);
+    // 使用 Axios 发送文件到后端
+    //服务器保存
+    axios({
+        timeout: 0,
+        method: 'post',
+        url: `${Host_Port}/saveExcel`, // 替换为你的目标URL
+        data: formData,
+        headers: {'Content-Type': 'multipart/form-data'}
+    })
+        .then(function (response) {
+            console.log(response.data);
         })
         .catch(function (error) {
-            console.log('保存 Excel 文件时出错:', error);
+            console.error('Error:', error);
         });
 
 }
+
+// 创建一个blob
+function s2ab(s) {
+    let buf = new ArrayBuffer(s.length);
+    let view = new Uint8Array(buf);
+    for (let i = 0; i !== s.length; ++i) view[i] = s.charCodeAt(i) & 0xFF;
+    return buf;
+}
+
+
+function createExcel(table, tableName) {
+    // 创建工作簿
+    let wb = XLSX.utils.book_new();
+    // 将数据转换为工作表
+    let ws = XLSX.utils.aoa_to_sheet(table);
+    // ws['!cols'] = [
+    //     { wpx: 150 }, // 设置第一列宽度为 100 像素
+    //     { wpx: 150 }   // 设置第二列宽度为 80 像素
+    // ];
+    ws['!cols'] = [];
+    table.forEach(() => {
+        ws['!cols'].push({wpx: 150});
+    })
+    // 将工作表添加到工作簿
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+    // 生成Excel的配置项
+    let wbout = XLSX.write(wb, {bookType: 'xlsx', type: 'binary'});
+
+
+    // 创建下载链接
+    let blob = new Blob([s2ab(wbout)], {type: 'application/octet-stream'});
+    let url = URL.createObjectURL(blob);
+
+    // 创建a标签并模拟点击下载
+    let a = document.createElement('a');
+    a.href = url;
+    a.download = tableName + '.xlsx';
+    document.body.appendChild(a);
+    a.click();
+
+    // 清理
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    return blob;
+}
+
 
 //合并服务器value与页面输入的key
 function CombinedData(serverData) {
