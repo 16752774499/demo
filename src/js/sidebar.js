@@ -149,8 +149,10 @@ window.onload = async function () {
                         data: Data
                     }
                     // console.log(SendData);
-                    SaveJson(SendData);
+
                     //     保存到本地与服务器
+                    SaveJson(SendData);
+                    overLoad();
                 });
                 document.getElementById("saveExcel").addEventListener("click", () => {
                     CombinedData(response.data);
@@ -158,14 +160,13 @@ window.onload = async function () {
                         data: Data
                     }
                     // console.log(SendData);
-                    SaveExcel(SendData);
+
                     //     保存到本地与服务器
+                    SaveExcel(SendData);
+                    overLoad();
                 });
                 document.getElementById("backButton").addEventListener("click", () => {
-                    chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
-                        // 重新加载当前标签页
-                        chrome.tabs.reload(tabs[0].id);
-                    });
+                    overLoad();
                 });
 
             })
@@ -269,7 +270,7 @@ function SaveExcel(SendData) {
     console.log(table);
     let formData = new FormData();
     formData.append('file', createExcel(table, fileName), fileName);
-    formData.append('fileName',fileName);
+    formData.append('fileName', fileName);
     // 使用 Axios 发送文件到后端
     //服务器保存
     axios({
@@ -381,8 +382,13 @@ function traverseObject(obj) {
 
 }
 
-
-
+//重新加载
+function overLoad() {
+    chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
+        // 重新加载当前标签页
+        chrome.tabs.reload(tabs[0].id);
+    });
+}
 
 
 

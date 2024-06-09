@@ -1,4 +1,3 @@
-
 /*
 * background.js为插件默认脚本
 *
@@ -17,9 +16,6 @@ console.log("spider");
 //         height: 600
 //     });
 // });
-
-
-
 
 
 // chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
@@ -89,7 +85,6 @@ console.log("spider");
 //
 
 
-
 // background.js
 var sidebarWindowId;
 var webWindowId;
@@ -101,7 +96,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         // 逻辑处理XPath，例如发送到popup页面显示，或者存储起来
         chrome.runtime.sendMessage({action: 'displayXPath', xpath: request.xpath});
         // 控制窗口跳转回原来的独立窗口页面
-        getDataFromStorage("sidebarWindowId",function(result, error){
+        getDataFromStorage("sidebarWindowId", function (result, error) {
             if (error) {
                 // 如果发生错误
                 console.error('Failed to retrieve sidebarWindowId:', error);
@@ -120,7 +115,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.action === 'openAndNavigate') {
         console.log("接受到openAndNavigate");
-        getDataFromStorage("webWindowId",function(result, error){
+        getDataFromStorage("webWindowId", function (result, error) {
             if (error) {
                 // 如果发生错误
                 console.error('Failed to retrieve webWindowId:', error);
@@ -135,9 +130,9 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     }
 });
 //GetWindowID
-chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     if (request.action === "getWindowId") {
-        chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+        chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
             if (tabs.length > 0) {
                 webWindowId = tabs[0].windowId;
                 sendResponse({windowId: tabs[0].windowId});
@@ -153,14 +148,14 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.action === 'webWindowId') {
         webWindowId = request.webWindowId;
         // console.log("webWindowId="+webWindowId);
-        saveDataToStorage({webWindowId: request.webWindowId},function(success, error){
+        saveDataToStorage({webWindowId: request.webWindowId}, function (success, error) {
             if (success) {
                 console.log('webWindowId saved successfully');
             } else {
                 console.error('Failed to save webWindowId:', error);
             }
         });
-        getDataFromStorage(['webWindowId'], function(result, error) {
+        getDataFromStorage(['webWindowId'], function (result, error) {
             if (error) {
                 // 如果发生错误
                 console.error('Failed to retrieve webWindowId:', error);
@@ -174,17 +169,17 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         });
 
 
-    }else if(request.action === 'sidebarWindowId'){
+    } else if (request.action === 'sidebarWindowId') {
         sidebarWindowId = request.sidebarWindowId;
         // console.log("sidebarWindowId="+sidebarWindowId);
-        saveDataToStorage({sidebarWindowId: request.sidebarWindowId},function(success, error){
+        saveDataToStorage({sidebarWindowId: request.sidebarWindowId}, function (success, error) {
             if (success) {
                 console.log('sidebarWindowId saved successfully');
             } else {
                 console.error('Failed to save sidebarWindowId:', error);
             }
         });
-        getDataFromStorage(['sidebarWindowId'], function(result, error) {
+        getDataFromStorage(['sidebarWindowId'], function (result, error) {
             if (error) {
                 // 如果发生错误
                 console.error('Failed to retrieve sidebarWindowId:', error);
@@ -220,7 +215,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 //     });
 // });
 function saveDataToStorage(data, callback) {
-    chrome.storage.local.set(data, function() {
+    chrome.storage.local.set(data, function () {
         if (chrome.runtime.lastError) {
             // 如果发生错误，打印错误信息
             console.error('Error saving data:', chrome.runtime.lastError);
@@ -236,8 +231,9 @@ function saveDataToStorage(data, callback) {
         }
     });
 }
+
 function getDataFromStorage(keys, callback) {
-    chrome.storage.local.get(keys, function(result) {
+    chrome.storage.local.get(keys, function (result) {
         if (chrome.runtime.lastError) {
             // 如果发生错误，打印错误信息
             console.error('Error retrieving data:', chrome.runtime.lastError);
