@@ -126,7 +126,7 @@ window.onload = async function () {
                     body.removeChild(body.firstChild);
                 }
                 console.log(typeof response.data);
-                firstList = response.data["page_1"]["dom_1"];
+                firstList = response.data[0]["page_1"]["dom_1"];
 
 
                 let head_body = "<button id=\"backButton\" class=\"backButton\">返回</button><div class=\"container\">";
@@ -144,7 +144,7 @@ window.onload = async function () {
 
 
                 document.getElementById("saveJson").addEventListener("click", () => {
-                    CombinedData(response.data);
+                    CombinedData(response.data[0]);
                     let SendData = {
                         data: Data
                     }
@@ -155,7 +155,7 @@ window.onload = async function () {
                     overLoad();
                 });
                 document.getElementById("saveExcel").addEventListener("click", () => {
-                    CombinedData(response.data);
+                    CombinedData(response.data[0]);
                     let SendData = {
                         data: Data
                     }
