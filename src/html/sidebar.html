@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>数据采集配置</title>
+    <script src="../js/configuration.js"></script>
+    <script src="../js/sidebar.js"></script>
+    <script src="../js/axios.js"></script>
+    <script src="../js/FileSaver.js"></script>
+    <script src="../js/xlsx.full.min.js"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/data-view.css">
+    <link rel="stylesheet" href="../css/saveFile.css">
+</head>
+
+<body class="sidebar-body">
+    <div class="sidebar-container">
+        <!-- 头部区域 -->
+        <div class="header">
+            <h2 class="title">数据采集配置</h2>
+            <div class="url-display">
+                <p class="url-text">请确认以下配置信息</p>
+            </div>
+        </div>
+
+        <!-- 配置表单 -->
+        <div class="config-form">
+            <form>
+                <!-- URL配置 -->
+                <div class="form-group">
+                    <label for="input3">页面URL</label>
+                    <div class="input-wrapper">
+                        <input type="text" id="input3" name="input1" class="styled-input" placeholder="请确认URL是否正确，错误或为空请手动添加">
+                    </div>
+                </div>
+
+                <!-- 页数配置 -->
+                <div class="form-group">
+                    <label for="input1">采集页数</label>
+                    <div class="input-wrapper">
+                        <input type="number" id="input1" name="input1" class="styled-input" value="1" min="1">
+                    </div>
+                </div>
+
+                <!-- XPath配置 -->
+                <div class="form-group">
+                    <label for="xpathInput">需要采集的XPath</label>
+                    <div class="input-wrapper">
+                        <textarea id="xpathInput" name="input2" class="styled-textarea" placeholder="请点击需要采集的元素"></textarea>
+                    </div>
+                </div>
+
+                <!-- 提交按钮 -->
+                <div class="form-group">
+                    <button type="submit" id="submitInput" class="submit-button">开始采集</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- 页脚 -->
+        <footer class="footer">
+            <div class="copyright-section">
+                <p class="copyright">@xiaohua-2022-5-22</p>
+            </div>
+            <div class="disclaimer">
+                <p class="disclaimer-text">免责声明：本插件仅供学习交流使用</p>
+                <p class="disclaimer-detail">请遵守网站规则和相关法律法规</p>
+            </div>
+        </footer>
+    </div>
+</body>
+
+</html>

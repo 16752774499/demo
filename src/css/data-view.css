@@ -1,0 +1,163 @@
+/* 数据展示页面的基础样式 */
+
+.data-container {
+    width: 100%;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    padding: 20px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.content-wrapper {
+    flex: 1;
+    max-width: 800px;
+    margin: 20px auto;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* 返回按钮样式 */
+
+.back-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 10px 20px;
+    background: linear-gradient(135deg, #4860da 0%, #3f54c3 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    font-weight: 500;
+    z-index: 100;
+}
+
+.back-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(72, 96, 218, 0.3);
+}
+
+
+/* 文件名输入区域 */
+
+.filename-section {
+    margin: 20px 0 30px 0;
+}
+
+.styled-input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    color: #333;
+    background: white;
+    transition: all 0.3s ease;
+}
+
+.styled-input:focus {
+    border-color: #4860da;
+    box-shadow: 0 0 0 2px rgba(72, 96, 218, 0.2);
+    outline: none;
+}
+
+
+/* 数据列表区域 */
+
+.data-list {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 30px;
+    overflow-y: auto;
+    max-height: calc(100vh - 300px);
+    padding-right: 10px;
+}
+
+.data-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.data-list::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+}
+
+.data-list::-webkit-scrollbar-thumb {
+    background: rgba(72, 96, 218, 0.3);
+    border-radius: 4px;
+}
+
+.data-item {
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.textbox {
+    margin-bottom: 10px;
+    color: #2c3e50;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    padding: 10px;
+    background: rgba(72, 96, 218, 0.05);
+    border-radius: 6px;
+}
+
+
+/* 底部按钮组 */
+
+.button-group {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+}
+
+.action-button {
+    min-width: 150px;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.action-button.json {
+    background: linear-gradient(135deg, #4860da 0%, #3f54c3 100%);
+}
+
+.action-button.excel {
+    background: linear-gradient(135deg, #1ccc88 0%, #19b77c 100%);
+}
+
+.action-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.action-button:active {
+    transform: translateY(0);
+}

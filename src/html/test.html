@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/test.js"></script>
+    <title>Download JSON</title>
+</head>
+<body>
+<button onclick="downloadObjectAsJson(yourObject, 'data')">Download JSON</button>
+
+<script>
+    // 定义您要下载的对象
+    var yourObject = {
+        key1: 'value1',
+        key2: 'value2'
+    };
+
+    // 下载对象为 JSON 文件的函数
+    function downloadObjectAsJson(object, fileName) {
+        var json = JSON.stringify(object, null, 2);
+        var blob = new Blob([json], { type: 'application/json' });
+        var url = URL.createObjectURL(blob);
+
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = fileName + '.json';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    }
+</script>
+</body>
+</html>

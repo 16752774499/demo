@@ -1,0 +1,40 @@
+{
+    "manifest_version": 3,
+    "name": "Standalone Extension Window",
+    "version": "1.0",
+    "description": "An example Chrome extension with a standalone window.",
+    "action": {
+        "default_popup": "./src/html/popup.html",
+        "default_icon": {
+            "16": "./src/img/logo.png",
+            "48": "./src/img/logo.png",
+            "128": "./src/img/logo.png"
+        }
+    },
+    "background": {
+        "service_worker": "./src/js/background.js"
+    },
+    "permissions": [
+        "activeTab",
+        "scripting",
+        "storage",
+        "windows",
+        "browsingData",
+        "tabs",
+        "cookies"
+    ],
+    "content_scripts": [{
+        "matches": [
+            "https://we.51job.com/*",
+            "https://www.zhaopin.com/sou*",
+            "https://www.zhipin.com/web/geek*"
+        ],
+        "js": ["./src/js/content.js"],
+        "all_frames": true
+    }],
+    "icons": {
+        "16": "./src/img/logo.png",
+        "48": "./src/img/logo.png",
+        "128": "./src/img/logo.png"
+    }
+}

@@ -1,0 +1,26 @@
+
+.econtainer {
+    width: 400px;
+    height: 100vh;
+    margin: 0 auto;
+    padding: 20px;
+}
+.textbox {
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    padding: 5px;
+    margin-bottom: 10px;
+    pointer-events: none; /* 禁止文本框编辑 */
+}
+input {
+    padding: 5px;
+    margin-left: 10px;
+}
+button {
+    padding: 5px 10px;
+    margin-right: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
